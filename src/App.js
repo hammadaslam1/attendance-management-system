@@ -9,12 +9,21 @@ import ReportGeneration from "./screens/admin/ReportGeneration";
 import StudentRecord from "./screens/admin/StudentRecord";
 import Login from "./screens/Login";
 import Registration from "./screens/Registration";
+import LAYER from "./components/assets/bg_layer.png";
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-      {/* <Registration /> */}
+    <div
+      className="layer flex justify-center items-center min-h-screen"
+      style={{
+        backgroundImage: `url(${LAYER})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      {/* <Login /> */}
+      <Registration />
 
       {/* client */}
       {/* <Attendance /> */}

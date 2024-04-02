@@ -1,4 +1,6 @@
+import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
+import LoginInput from "../components/LoginInputs";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -12,41 +14,36 @@ const Registration = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <label>
-        Profile Picture:
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setProfilePicture(e.target.files[0])}
-        />
-      </label>
-      <button type="submit">Register</button>
-    </form>
+    <div className="w-[400px] p-12 h-[fit-content] flex flex-col items-center bg-slate-300 rounded-xl">
+      <Typography variant="h4">Registration</Typography>
+      <LoginInput
+        type="text"
+        value={name}
+        label="Full Name"
+        onChange={(e) => setName(e.target.value)}
+        sx={{ width: "100%" }}
+      />
+      <LoginInput
+        type="email"
+        value={email}
+        label="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        sx={{ width: "100%" }}
+      />
+      <LoginInput
+        type="password"
+        value={password}
+        label="Password"
+        onChange={(e) => setPassword(e.target.value)}
+        sx={{ width: "100%" }}
+      />
+      <Button
+        variant="contained"
+        sx={{ backgroundColor: "#555", "&:hover": { backgroundColor: "#444" } }}
+      >
+        Register
+      </Button>
+    </div>
   );
 };
 
