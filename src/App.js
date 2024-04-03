@@ -10,6 +10,7 @@ import StudentRecord from "./screens/admin/StudentRecord";
 import Login from "./screens/Login";
 import Registration from "./screens/Registration";
 import LAYER from "./components/assets/bg_layer.png";
+import Navigation from "./screens/router/Navigation";
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
         backgroundAttachment: "fixed",
       }}
     >
+      <Navigation />
       {/* <Login /> */}
-      <Registration />
+      {/* <Registration /> */}
 
       {/* client */}
       {/* <Attendance /> */}

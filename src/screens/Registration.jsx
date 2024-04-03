@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import LoginInput from "../components/LoginInputs";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -39,10 +40,19 @@ const Registration = () => {
       />
       <Button
         variant="contained"
-        sx={{ backgroundColor: "#555", "&:hover": { backgroundColor: "#444" } }}
+        sx={{
+          backgroundColor: "#555",
+          m: 2,
+          textTransform: "capitalize",
+          "&:hover": { backgroundColor: "#444" },
+        }}
       >
         Register
       </Button>
+      <div className="w-[90%] h-1 bg-gray-500 mx-auto mb-4 rounded-full"></div>
+      <Typography variant="body2" fontFamily={"Roboto"}>
+        Already registered? <Link to={"/login"}>Login Here</Link>
+      </Typography>
     </div>
   );
 };
