@@ -5,19 +5,21 @@ import Home from "../Home";
 import Sidebar from "../../components/Sidebar";
 import Navigation from "./Navigation";
 import Navbar from "../../components/Navbar";
+import { useSelector } from "react-redux";
 
 const EnterApp = () => {
+  const { user } = useSelector((state) => state.user);
   return (
     <div>
       <BrowserRouter>
-        {false && (
+        {user && (
           <>
             <Navbar />
             <Sidebar />
           </>
         )}
         <Routes>
-          {true && (
+          {!user && (
             <>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Registration />} />
