@@ -1,17 +1,61 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable eqeqeq */
 import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import LoginInput from "../components/LoginInputs";
 import { Link } from "react-router-dom";
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "../firebase";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signinSuccess } from "../redux/userReducer/userReducer";
 
 const Registration = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Send registration request to server
+  const handleRegister = () => {
+    if (
+      name &&
+      email &&
+      password &&
+      name != "" &&
+      email != "" &&
+      password != ""
+    ) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          updateProfile(auth.currentUser, {
+            displayName: name,
+            // photoURL: profilePicture,
+          })
+            .then(() => {
+              dispatch(
+                signinSuccess({
+                  name: name,
+                  email: email,
+                  userId: auth.currentUser.uid,
+                })
+              );
+            })
+            .then(() => {
+              navigate("/");
+              // alert("ok");
+            });
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } else {
+      alert("Please fill all the fields");
+    }
   };
 
   return (
@@ -46,6 +90,7 @@ const Registration = () => {
           textTransform: "capitalize",
           "&:hover": { backgroundColor: "#444" },
         }}
+        onClick={handleRegister}
       >
         Register
       </Button>

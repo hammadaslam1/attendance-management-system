@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./user/userSlice";
+import userReducer from "./userReducer/userReducer";
 // import themeReducer from "./theme/ThemeSlice";
 // import tabReducer from "./tabs/tabSlice";
 import storage from "redux-persist/lib/storage";
@@ -21,7 +21,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 
-export const store = configureStore({
+export const Store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -29,4 +29,4 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+export const persistor = persistStore(Store);

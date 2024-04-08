@@ -1,16 +1,36 @@
-import { Button, Input, Typography } from "@mui/material";
+/* eslint-disable eqeqeq */
+import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import LoginInput from "../components/LoginInputs";
 import { Link, useNavigate } from "react-router-dom";
+import { auth, signInWithEmailAndPassword } from "../firebase";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Send login request to server
+  const handleLogin = () => {
+    if (email && password && email != "" && password != "") {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((credentials) => {
+          dispatch({
+            name: auth.currentUser.displayName,
+            email: email,
+            userId: auth.currentUser.uid,
+          }).then(() => {
+            navigate("/");
+            // alert()
+          });
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } else {
+      alert("Please fill all the fields");
+    }
   };
 
   return (
@@ -40,7 +60,7 @@ const Login = () => {
           textTransform: "capitalize",
           "&:hover": { backgroundColor: "#444" },
         }}
-        onClick={() => navigate("/")}
+        onClick={() => handleLogin()}
       >
         Login
       </Button>
